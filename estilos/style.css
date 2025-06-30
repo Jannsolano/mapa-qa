@@ -12,38 +12,253 @@
     padding: 0;
     margin: 0;
     box-sizing: border-box;
+    text-decoration: none;
+    color: inherit;
 }
 
 body {
     background-color: var(--darkg);
     color: var(--white);
     width: 100%;
+    min-height: 100vh;
     display: grid;
     grid-template-rows:100px 1fr 100px;
-    grid-template-columns: 3fr 1fr;
+    grid-template-columns: 1fr;
+    font-size: 1.5em;
+    overflow-x: hidden;
 }
 
 header {
-    grid-area: 1 / 1 / span 2 / span 2;
+    grid-area: 1 / 1 / 2 / 2;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
+div.col {
+    grid-area: 2 / 1 / 3 /2;
+    display: grid;
+    grid-template-columns: 1fr minmax(680px, 980px) 280px 1fr;
+    min-width: 100%;
+    
+}
 main {
-    grid-area: 2 / 1 / 3 / 2;
+    grid-area: 1 / 2 / 2 / 3;
     background-color: var(--lightg);
     border-radius: 20px;
     margin: 20px 10px;
     padding: 20px;
+    box-shadow: 2px 2px 8px var(--black);
+    word-wrap: break-word;
+    overflow-wrap: break-word;
 }
 
+h2 {
+    background-color: var(--darkg);
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 1px 2px 10px var(--darkg);
+}
+
+h3, p {
+    padding: 15px;
+    text-shadow: 2px 1px 2px var(--black);
+}
+
+ul, ol, dl {
+    padding: 20px;
+    text-shadow: 2px 1px 2px var(--black);
+}
+
+.card1 {
+    background-color: var(--blue);
+    place-content: center;
+    text-align: center;
+    border-radius: 10px;
+    box-shadow: 2px 2px 8px var(--black);
+}
+
+.arrow {
+    text-align: center;
+    place-content: center;
+    font-size: 2em;
+}
+
+/*-- Imagem do primeiro e segundo exemplo --*/
+div.exemplo1, div.exemplo2 {
+    margin: 20px;
+    display: grid;
+    grid-template-rows: 1fr 1fr 1fr;
+    grid-template-columns: 1fr 1fr 1fr;
+    height: 300px;
+}
+#softt {
+    grid-area: 1 / 2 / 2 / 3;
+}
+#e1arr1 {
+    grid-area: 2 / 2 / 3 / 3;
+}
+#e1arr2 {
+    grid-area: 3 / 2 / 4 / 3;
+}
+#statt {
+    grid-area: 3 / 1 / 4 / 2;
+}
+#dintt {
+    grid-area: 3 / 3 / 4 / 4;
+}
+/*-- Inicio de terceiro exemplo --*/
+div.exemplo3 {
+    margin: 20px;
+    display: grid;
+    grid-template-rows: 1fr 0.4fr 1fr 0.4fr 1fr;
+    grid-template-columns: 1fr 50px 1fr 50px 1fr;
+    height: 550px;
+}
+#e3carda {
+    grid-area: 1/1/2/2;
+}
+#e3cardb {
+    grid-area: 1/3/2/4;
+}
+#e3cardc {
+    grid-area: 1/5/2/6;
+}
+#e3cardd {
+    grid-area: 3/5/4/6;
+}
+#e3carde {
+    grid-area: 3/3/4/4;
+}
+#e3cardf {
+    grid-area: 3/1/4/2;
+}
+#e3cardg {
+    grid-area: 5/1/6/2;
+}
+#e3arr1 {
+    grid-area: 1/2/2/3;
+}
+#e3arr2 {
+    grid-area: 1/4/2/5;
+}
+#e3arr3 {
+    grid-area: 2/5/3/6;
+}
+#e3arr4 {
+    grid-area: 3/4/4/5;
+}
+#e3arr5 {
+    grid-area: 3/2/4/3;
+}
+#e3arr6 {
+    grid-area: 4/1/5/2;
+}
+/*-----*/
 aside {
-    grid-area: 2 / 2 / 2 / 3;
-    background-color: var(--black);
-    border-radius: 20px;
-    margin: 20px 10px;
+    grid-area: 1 / 3 / 2 / 4;
+    border-radius: 10px;
+    min-width: 260px;
+    margin-top: 20px;
+    margin-right: 10px;
+    text-align: center;
+    background-color: #333637;
+    box-shadow: 2px 2px 8px var(--black);
+    padding: 10px;
+}
+
+aside.nav {
+    color: inherit;
+}
+
+button {
+    margin: 10px;
+    padding: 10px 20px;
+    background-color:var(--blue);
+    color: var(--white);
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 16px;
+    width: 80%;
+}
+
+button:hover {
+    background-color: var(--white);
+    color: var(--blue);
 }
 
 footer {
-    grid-area: -1 / 1 / -1 /3;
+    grid-area: 3 / 1 / 4 / -1;
     background-color: var(--lightg);
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
+@media screen and (max-width: 1200px) {
+    div.col {
+        /* Para telas menores, o main pode encolher mais, o aside mantém 280px */
+        /* Note que 1fr minmax(auto, ...) 280px 1fr ainda é uma boa opção aqui.
+           Se a barra ainda aparecer, pode ser que 280px para o aside seja demais
+           em telas muito estreitas. */
+        grid-template-columns: 1fr minmax(auto, 700px) 250px 1fr; /* Exemplo: main um pouco menor, aside um pouco menor */
+    }
+    aside {
+        min-width: 200px; /* Permite que o aside encolha um pouco mais */
+    }
+}
+
+/* Breakpoint para celulares e tablets em modo retrato (empilhar) */
+@media screen and (max-width: 768px) { /* Este é um breakpoint comum para empilhar */
+    div.col {
+        /* Mude o grid para ter apenas uma coluna. O main e o aside se empilharão. */
+        grid-template-columns: 1fr; /* ALTERADO: Apenas uma coluna para div.col */
+        /* Você pode querer ajustar a margin-left/right do body ou da div.col
+           para dar um espaçamento lateral para o conteúdo em telas pequenas,
+           já que as colunas 1fr não estarão mais fazendo isso para o main/aside. */
+        margin: 0 15px; /* Adiciona margens laterais à div.col em telas pequenas */
+    }
+
+    main {
+        /* Main ocupa a primeira área da única coluna */
+        grid-area: 1 / 1 / 2 / 2; /* ALTERADO: main na única coluna de div.col */
+        margin: 20px 0; /* Ajuste margens, pois a div.col já tem margin lateral */
+    }
+
+    aside {
+        /* Aside ocupa a segunda área da única coluna */
+        grid-area: 2 / 1 / 3 / 2; /* ALTERADO: aside na segunda linha da única coluna de div.col */
+        margin: 20px 0; /* Ajuste margens, pois a div.col já tem margin lateral */
+        min-width: auto; /* Remove o min-width fixo para o aside, deixando-o flexível */
+        width: 100%; /* Ocupa a largura total da coluna */
+    }
+
+    /* Opcional: ajustar padding de outros elementos se ficarem muito apertados */
+    h2, h3, p, ul, ol, dl {
+        padding: 10px; /* Reduz padding para economizar espaço em telas pequenas */
+    }
+    .card1 {
+        padding: 10px; /* Exemplo: reduz padding */
+        font-size: 1.2em; /* Exemplo: reduz tamanho da fonte */
+    }
+    div.exemplo1, div.exemplo2, div.exemplo3 {
+        margin: 10px; /* Reduz margens externas dos exemplos */
+        height: auto; /* Permite que a altura seja flexível com o conteúdo */
+    }
+    div.exemplo3 {
+        /* Para o exemplo 3, pode ser necessário simplificar ainda mais o grid */
+        grid-template-columns: 1fr; /* Ou outras proporções, se os elementos forem empilhados */
+        grid-template-rows: repeat(12, auto); /* Ajuste conforme o número de cards e setas */
+    }
+    #e3carda, #e3arr1, #e3cardb, #e3arr2, #e3cardc, #e3arr3, #e3cardd, #e3arr4, #e3carde, #e3arr5, #e3cardf, #e3arr6, #e3cardg {
+        grid-area: auto; /* Remove grid-area fixas para permitir empilhamento */
+        margin-bottom: 10px; /* Adiciona espaçamento entre os itens empilhados */
+    }
+    .arrow {
+        font-size: 1.5em; /* Reduz tamanho das setas */
+    }
+}
+
+/* Você pode adicionar mais breakpoints se desejar, por exemplo: */
+/* @media screen and (max-width: 480px) { ... } para celulares bem pequenos */
