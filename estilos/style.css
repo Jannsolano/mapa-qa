@@ -25,7 +25,6 @@ body {
     grid-template-rows:100px 1fr 100px;
     grid-template-columns: 1fr;
     font-size: 1.5em;
-    overflow-x: hidden;
 }
 
 header {
@@ -49,8 +48,31 @@ main {
     margin: 20px 10px;
     padding: 20px;
     box-shadow: 2px 2px 8px var(--black);
-    word-wrap: break-word;
-    overflow-wrap: break-word;
+}
+
+main > pre {
+    background-color: var(--darkg);
+    padding: 15px;
+    border-radius: 8px;
+    margin: 15px 0;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 0.8em;
+    line-height: 1.4;
+    white-space: pre;
+    overflow-x: auto;
+    max-width: 100%;
+}
+
+main > code {
+    display: block;
+}
+
+main > code:not(pre > code) {
+    background-color: var(--lightg);
+    padding: 2px 4px;
+    border-radius: 4px;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 0.9em;
 }
 
 h2 {
@@ -165,6 +187,13 @@ aside {
     background-color: #333637;
     box-shadow: 2px 2px 8px var(--black);
     padding: 10px;
+    display: flex;
+    flex-direction: column;
+    position: sticky;
+    top: 20px;
+    height: calc(100vh - 100px - 100px - 40px);
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
 }
 
 aside.nav {
@@ -181,6 +210,11 @@ button {
     cursor: pointer;
     font-size: 16px;
     width: 80%;
+}
+
+#topbutton {
+    margin-top: auto;
+
 }
 
 button:hover {
