@@ -52,9 +52,9 @@ main {
 
 main > pre {
     background-color: var(--darkg);
-    padding: 15px;
+    padding: 5px;
     border-radius: 8px;
-    margin: 15px 0;
+    margin: 5px 0;
     font-family: 'Courier New', Courier, monospace;
     font-size: 0.8em;
     line-height: 1.4;
