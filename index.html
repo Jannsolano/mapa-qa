@@ -564,9 +564,70 @@
                     console.log("Valor da posição é: " + array[index])
                 }
             </code></pre>
-            <h2 id="HtmlAu">4. Entendendo HTML para automação</h2>
             <p>
-
+                Lembre-se de sempre fazer alguns exercícios de programação para não perder o costume.
+            </p>
+            <h2 id="HtmlAu">4. Entendendo HTML para automação</h2>
+            <h3>Estrutura básica de um elemento HTML</h3>
+            <p>
+                Um elemento HTML costuma ter
+            </p>
+            <pre><code>
+                &lt;tag atributo="valor"&gt;conteúdo&lt;/tag&gt;
+                exemplo
+                &lt;button id="login-btn" class="btn-prime"&gt;entrar&lt;/button&gt;
+            </code></pre>
+            <p>
+                aqui temos:
+            </p>
+            <ul>
+                <li>Tag: button</li>
+                <li>Atributos: id, class</li>
+                <li>Conteúdo: Entrar</li>
+            </ul>
+            <h3>🔹 Principais atributos usados em automação</h3>
+            <ul>
+                <li>id → único na página (preferência nº1)</li>
+                <li>name → muitas vezes usado em formulários</li>
+                <li>class → pode repetir em vários elementos (cuidado)</li>
+                <li>data- (atributos customizados)* → exemplo: data-cy="login-button" (ótimo para testes, porque são feitos para isso)</li>
+                <li>type, href, alt, title, value, placeholder → usados em inputs, links, imagens etc.</li>
+            </ul>
+            <h3>🔹 Como inspecionar elementos</h3>
+            <ol>
+                <li>Abrir o DevTools → Clique com botão direito → "Inspecionar".</li>
+                <li>Na aba Elements, passe o mouse no código → o site destaca o elemento.</li>
+                <li>Clique com direito no código → Copy → Copy selector / Copy XPath (gera um seletor, mas muitas vezes precisa ser ajustado).</li>
+                <li>Ver atributos únicos e escolher o melhor.</li>
+            </ol>
+            <h4>
+                para automação, o QA precisa ler a estrutura do HTML, identificar atributos estáveis e escolher seletores únicos.
+            </h4>
+            <h3>🔹 Seletores únicos (CSS e XPath)</h3>
+            <h4>CSS Selectors (mais usados em Cypress, Playwright, Selenium moderno)</h4>
+            <ul>
+                <li>Por id: #login-btn</li>
+                <li>Por class: .btn.primary</li>
+                <li>Por atributo: [data-cy="login-button"]</li>
+                <li>Por tag + atributo: input[name="email"]</li>
+                <li>Por hierarquia: form > input[type="password"]</li>
+            </ul>
+            <h4>XPath (mais comum em Selenium)</h4>
+            <ul>
+                <li>Absoluto (ruim): /html/body/div[2]/form/input[1]</li>
+                <li>Relativo (bom): //input[@name='email']</li>
+                <li>Por texto: //button[text()='Entrar']</li>
+                <li>Combinando condições: //div[@class='card' and @id='login-card']</li>
+            </ul>
+            <h3>🔹 Boas práticas para QA</h3>
+            <ol>
+                <li>Prefira id ou data-* → são estáveis e únicos.</li>
+                <li>Evite selecionar por texto ou posição (ex: nth-child, div[3]) → quebra fácil.</li>
+                <li>Combine atributos para garantir unicidade → ex: input[type="email"][name="userEmail"].</li>
+                <li>Se possível, peça para o time de dev adicionar atributos data-testid, data-cy, data-qa.</li>
+            </ol>
+            <p>
+                Isso garante que os testes não quebrem facilmente quando o site mudar.
             </p>
             <h2 id="AuCypress">5. Automação de Testes com Cypress</h2>
             <p>
@@ -584,6 +645,106 @@
             <p>
                 
             </p>
+            <h2 id="syllabus">ISQTB Foundation Level</h2>
+            <h3>Capítulo 1 – Fundamentos do Teste</h3>
+            <p>
+                👉 Tema: O que é teste, por que testar e princípios básicos.
+            </p>
+            <ul>
+                <li><b>O que é teste:</b> Avaliar um software para encontrar defeitos, reduzir riscos e aumentar confiança na qualidade.</li>
+                <li><b>Defeito vs Falha vs Erro:</b></li>
+                <ul>
+                    <li>Erro (Mistake): falha humana (ex: programador esqueceu uma condição).</li>
+                    <li>Defeito (Bug/Fault): problema no código.</li>
+                    <li>Falha (Failure): quando o defeito aparece na execução.</li>
+                </ul>
+                <li>Objetivos do teste: encontrar falhas, prevenir defeitos, dar confiança no sistema.</li>
+                <li>Princípios do teste (7):</li>
+                <ol>
+                    <li>Testar mostra presença de defeitos, não a ausência.</li>
+                    <li>Teste exaustivo é impossível.</li>
+                    <li>Testar cedo é mais barato.</li>
+                    <li>Defeitos se agrupam (mais comuns em áreas críticas).</li>
+                    <li>Paradoxo do pesticida: repetir os mesmos testes deixa de encontrar novos bugs.</li>
+                    <li>Teste depende do contexto (ex: teste para app bancário ≠ teste para jogo).</li>
+                    <li>Ilusão da ausência de erros: sistema sem bugs não significa útil se não atender necessidades.</li>
+                </ol>
+                <li>Psicologia do teste: Devs e testers têm visões diferentes → importante comunicação clara.</li>
+            </ul>
+            <h3>Capítulo 2 – Teste Durante o Ciclo de Vida do Software</h3>
+            <p>
+                👉 Tema: Onde os testes entram no desenvolvimento.
+            </p>
+            <ul>
+                <li>Modelos de ciclo de vida:</li>
+                <ul>
+                    <li>Cascata: fases sequenciais.</li>
+                    <li>Incremental/Iterativo: feito em partes.</li>
+                    <li>Ágil: entregas rápidas e testes contínuos.</li>
+                </ul>
+                <li>Níveis de teste (de menor para maior):</li>
+                <ol>
+                    <li>Unitário (Componente): cada pedacinho isolado.</li>
+                    <li>Integração: verificar como módulos trabalham juntos.</li>
+                    <li>Sistema: testar o software completo.</li>
+                    <li>Aceitação: cliente valida se atende necessidades.</li>
+                </ol>
+                <li>Tipos de teste:</li>
+                <ul>
+                    <li>Funcional: o que o sistema faz (requisitos).</li>
+                    <li>Não-funcional: desempenho, usabilidade, segurança etc.</li>
+                    <li>Estrutural (caixa-branca): olhar dentro do código.</li>
+                    <li>Mudança: regressão e confirmação (retestar após alterações).</li>
+                </ul>
+                <li>Atividades de teste: <br>
+                    Planejar → Monitorar & Controlar → Analisar → Projetar → Implementar → Executar → Encerrar.
+                </li>
+                <li>Artefatos de teste: plano, casos de teste, suites, relatórios.</li>
+            </ul>
+            <h3>Capítulo 3 – Teste Estático</h3>
+            <p>
+                👉 Tema: Encontrar problemas sem rodar o sistema.
+            </p>
+            <ul>
+                <li>Teste dinâmico vs estático:</li>
+                <ul>
+                    <li>Dinâmico: executar o software.</li>
+                    <li>Estático: revisar documentos, código e requisitos sem execução.</li>
+                </ul>
+                <li>Benefícios: barato, pega erros cedo (ex: ambiguidade nos requisitos).</li>
+                <li>Revisões (tipos):</li>
+                <ol>
+                    <li>Informal (ex: par lê seu código).</li>
+                    <li>Revisão por pares.</li>
+                    <li>Revisão técnica.</li>
+                    <li>Inspeção (mais formal, com papéis definidos).</li>
+                </ol>
+                <li>Análise estática de código: ferramentas que apontam más práticas, código morto, vulnerabilidades.</li>
+            </ul>
+            <h3>Capítulo 4 – Técnicas de Teste</h3>
+            <p>
+                👉 Tema: Como projetar casos de teste.
+            </p>
+            <ul>
+                <li>Caixa-preta (baseada em especificação):</li>
+                <ul>
+                    <li>Particionamento de equivalência: dividir entradas em grupos válidos/ inválidos.</li>
+                    <li>Valores-limite: testar bordas (ex: 0, 1, máximo).</li>
+                    <li>Tabela de decisão: combinações de regras.</li>
+                    <li>Transição de estados: testar mudanças de estado (ex: login → logado → logout).
+</li>
+                    <li>Caso de uso: baseado no que o usuário faz.</li>
+                </ul>
+                <li>Caixa-branca (baseada em estrutura):</li>
+                <ul>
+                    <li>Testar caminhos do código: instruções, decisões, loops.</li>
+                    <li>Métricas: cobertura de instruções, de decisão, etc.</li>
+                </ul>
+                <li>Baseada em experiência:</li>
+                <ul>
+                    <li>Teste exploratório, checklist, ataques de erro → usar conhecimento e intuição do tester.</li>
+                </ul>
+            </ul>
         </main>
         <aside class="menuLateral">
             <button onclick="location.href='#inicio'">
@@ -599,19 +760,22 @@
                 <a class="nav" href="#JavaScptAutomation">JavaScript para automação</a>
             </button>
             <button onclick="location.href='#HtmlAu'">
-                <a class="nav" href="#HtmlAu">HTML para automação</a>
+                <a class="nav" href="#HtmlAu">HTML automação</a>
             </button>
             <button onclick="location.href='#AuCypress'">
-                <a class="nav" href="#AuCypress">Automação com Cypress</a>
+                <a class="nav" href="#AuCypress">Cypress</a>
             </button>
             <button onclick="location.href='#PostmanApi'">
-                <a class="nav" href="#PostmanApi">Testes de API com Postman</a>
+                <a class="nav" href="#PostmanApi">Testes de API</a>
             </button>
             <button onclick="location.href='#database'">
                 <a class="nav" href="#database">Banco de dados</a>
             </button>
             <button onclick="location.href='#MobileAu'">
-                <a class="nav" href="#MobileAu">Automação Mobile com Appium</a>
+                <a class="nav" href="#MobileAu">Automação Mobile</a>
+            </button>
+            <button onclick="location.href='#syllabus'">
+                <a class="nav" href="#syllabus">ISQTB Syllabus</a>
             </button>
             <button onclick="location.href='#cabecalho'" id="topbutton">&uarr; Top</button>
         </aside>
