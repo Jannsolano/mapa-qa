@@ -631,8 +631,115 @@
             </p>
             <h2 id="AuCypress">5. Automação de Testes com Cypress</h2>
             <p>
-
+                pré requisitos: primeiro instale o Node.js, Git, Visual Code, Github desktop(opcional)
             </p>
+            <h3>Iniciando o projeto cypress</h3>
+            <ol>
+                <li>Escolha um diretório e crie sua pasta do projeto</li>
+                <li>Uma vez selecionado, abra o terminal e digite:</li>
+                <ul>
+                    <li>npm init</li>
+                    <li>npm install cypress --save-dev</li>
+                </ul>
+                <li>Abra a pasta no Visual Code</li>
+                <li>Digite no terminal: npx cypress open</li>
+                <li>Ao iniciar o Cypress, escolha o navegador preferido</li>
+                <li>Crie os specs de teste</li>
+                <li>Coloque o domínio do site a testar no cy.visit</li>
+            </ol>
+            <h3>Comandos mais utilizados para automatizar</h3>
+            <h4>🔹 1. Navegação</h4>
+            <li>cy.visit('url') → abre a página</li>
+            <pre><code>cy.visit('http://localhost:3000/login')</code></pre>
+            <li>cy.url() → pega a URL atual</li>
+            <pre><code>cy.url().should('include', '/login')</code></pre>
+            <h4>2. Encontrar elementos</h4>
+            <li>cy.get('selector') → pega elemento pelo seletor CSS</li>
+            <pre><code>
+            cy.get('#login-btn')         // por ID
+            cy.get('.btn.primary')       // por classe
+            cy.get('[data-cy="email"]')  // por atributo customizado
+            </code></pre>
+            <li>cy.contains('texto') → busca pelo texto visível</li>
+            <pre><code>
+            cy.contains('Entrar').click()
+            </code></pre>
+            <h4>🔹 3. Interagir com elementos</h4>
+            <li>Click:</li>
+            <pre><code>
+            cy.get('#login-btn').click()
+            </code></pre>
+            <li>Digitar texto:</li>
+            <pre><code>
+            cy.get('[data-cy="email"]').type('teste@email.com')
+
+            cy.get('[data-cy="password"]').type('123456')
+            </code></pre>
+            <li>Limpar campo:</li>
+            <pre><code>
+            cy.get('[data-cy="email"]').clear()
+            </code></pre>
+            <li>Selecionar em dropdown:</li>
+            <pre><code>
+            cy.get('select').select('Opção 1')
+            </code></pre>
+            <li>Checkbox / Radio:</li>
+            <pre><code>
+            cy.get('[type="checkbox"]').check()
+            cy.get('[type="checkbox"]').uncheck()
+            cy.get('[type="radio"]').check('valor')
+            </code></pre>
+            <h4>🔹 4. Assertions (validações)</h4>
+            <li>Should (expectativas):</li>
+            <pre><code>
+            cy.get('#login-btn').should('be.visible')
+            cy.get('#login-btn').should('contain', 'Entrar')
+            cy.get('[data-cy="email"]').should('have.value', 'teste@email.com')
+            </code></pre>
+            <li>Chaining (encadeamento):</li>
+            <pre><code>cy.get('.alert').should('be.visible').and('contain', 'Erro')</code></pre>
+            <h4>🔹 5. Esperas e sincronização</h4>
+            <p>Cypress já espera automaticamente, mas às vezes precisa de algo extra</p>
+            <li>Esperar elemento aparecer:</li>
+            <pre><code>cy.get('.loading-spinner', { timeout: 10000 }).should('not.exist')</code></pre>
+            <li>Esperar tempo fixo (não recomendado, só emergencial):</li>
+            <pre><code>cy.wait(2000)</code></pre>
+            <h4>🔹 6. Trabalhando com listas / elementos múltiplos</h4>
+            <li>Primeiro / último:</li>
+            <pre><code>
+            cy.get('ul li').first().click()
+            cy.get('ul li').last().click()
+            </code></pre>
+            <li>Por índice:</li>
+            <pre><code>cy.get('ul li').eq(2).click() // terceiro item (índice começa em 0)</code></pre>
+            <li>Iterar em lista:</li>
+            <pre><code>
+            cy.get('ul li').each(($el, index) => {
+                cy.log(`Item ${index}: ${$el.text()}`)
+            })</code></pre>
+            <h4>🔹 7. Requisições (API)</h4>
+            <li>cy.request() → útil para setups de teste ou validar API junto com front.</li>
+            <pre><code>cy.request('GET', '/api/users').its('status').should('eq', 200)</code></pre>
+            <h4>🔹 8. Uploads / Downloads</h4>
+            <li>Com plugin cypress-file-upload:</li>
+            <pre><code>cy.get('input[type="file"]').attachFile('arquivo.pdf')</code></pre>
+            <h4>🔹 9. Armazenando dados</h4>
+            <li>Alias de elementos:</li>
+            <pre><code>
+            cy.get('#login-btn').as('botaoLogin')
+            cy.get('@botaoLogin').click()
+            </code></pre>
+            <li>Salvar valores:</li>
+            <pre><code>
+            cy.get('#user').invoke('text').then((user) => {
+                cy.log(user) // usar valor capturado
+            })
+            </code></pre>
+            <h4>🔹 10. Screenshots e gravações</h4>
+            <li>Tirar screenshot:</li>
+            <pre><code>cy.screenshot('nome-do-print')</code></pre>
+            <li>Gravação automática de vídeo:</li>
+            <pre><code>(Cypress já faz por padrão no <b>cypress run</b>).</code></pre>
             <h2 id="PostmanApi">6. Testes de API</h2>
             <p>
 
