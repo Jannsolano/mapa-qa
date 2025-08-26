@@ -745,9 +745,152 @@
 
             </p>
             <h2 id="database">7. Banco de dados</h2>
+            <ul>
+                <li>Banco de Dados (BD): Local organizado para guardar informações.</li>
+                <li>SGBD (Sistema Gerenciador de Banco de Dados): Software que gerencia o BD (ex: PostgreSQL, MySQL, Oracle, SQL Server).</li>
+                <li>SQL (Structured Query Language): Linguagem padrão para manipular BD.</li>
+                <li>Tabelas: Estruturas com linhas (registros) e colunas (campos).</li>
+                <li>CRUD: Operações principais:</li>
+                <ul>
+                    <li>Create → inserir</li>
+                    <li>Read → consultar</li>
+                    <li>Update → atualizar</li>
+                    <li>Delete → excluir</li>
+                </ul>
+            </ul>
+            <h3>🐘 PostgreSQL – Exemplos básicos de SQL</h3>
+            <h4>🔹 1. Criar uma tabela</h4>
+            <pre><code>
+            CREATE TABLE usuarios (
+                id SERIAL PRIMARY KEY,
+                nome VARCHAR(100),
+                email VARCHAR(100) UNIQUE,
+                idade INT
+                );
+            </code></pre>
+            <h4>🔹 2. Inserir dados (Create)</h4>
+            <pre><code>
+            INSERT INTO usuarios (nome, email, idade)
+            VALUES ('João Silva', 'joao@email.com', 30);
+            </code></pre>
             <p>
-
+                Inserir múltiplos de uma vez:
             </p>
+            <pre><code>
+            INSERT INTO usuarios (nome, email, idade)
+            VALUES 
+                ('Maria', 'maria@email.com', 25),
+                ('Carlos', 'carlos@email.com', 40);
+            </code></pre>
+            <h4>🔹 3. Consultar dados (Read)</h4>
+            <li>Todos os registros:</li>
+            <pre><code> SELECT * FROM usuarios; </code></pre>
+            <li>Apenas algumas colunas:</li>
+            <pre><code> SELECT nome, email FROM usuarios; </code></pre>
+            <li>Com condição:</li>
+            <pre><code> SELECT * FROM usuarios WHERE idade > 30; </code></pre>
+            <li>Ordenar:</li>
+            <pre><code> SELECT * FROM usuarios ORDER BY idade DESC; </code></pre>
+            <h4>🔹 4. Alterar dados (Update)</h4>
+            <pre><code>
+            UPDATE usuarios
+            SET idade = 31
+            WHERE id = 1;
+            </code></pre>
+            <h4>🔹 5. Excluir dados (Delete)</h4>
+            <pre><code> DELETE FROM usuarios WHERE id = 2; </code></pre>
+            <p>Apagar todos (cuidado ⚠️):</p>
+            <pre><code> DELETE FROM usuarios; </code></pre>
+            <h4>🔹 6. Popular múltiplas tabelas</h4>
+            <p>
+                Exemplo: usuarios e pedidos.
+            </p>
+            <pre><code>
+            CREATE TABLE pedidos (
+                id SERIAL PRIMARY KEY,
+                produto VARCHAR(100),
+                valor DECIMAL(10,2),
+                usuario_id INT REFERENCES usuarios(id)
+            );
+
+            INSERT INTO pedidos (produto, valor, usuario_id)
+            VALUES
+                ('Notebook', 3500.00, 1),
+                ('Celular', 2000.00, 1),
+                ('Fone de Ouvido', 300.00, 2);
+            </code></pre>
+            <h4>🔹 7. INNER JOIN (consultar dados relacionados)</h4>
+            <p>
+                INNER JOIN serve para juntar dados de duas (ou mais) tabelas que têm algo em comum.
+            </p>
+            <ul>
+                <li>Ele retorna apenas os registros que existem em ambas as tabelas (a interseção).</li>
+                <li>Normalmente a ligação é feita através de chave primária (PK) em uma tabela e chave estrangeira (FK) em outra.</li>
+            </ul>
+            <p>Exemplo prático:</p>
+            <li>Tabela <b>usuários</b></li>
+            <table>
+                <tr>
+                    <th>id</th>
+                    <th>nome</th>
+                </tr>
+                <tr>
+                    <td>1</td>
+                    <td>João</td>
+                </tr>
+                <tr>
+                    <td>2</td>
+                    <td>Maria</td>
+                </tr>
+            </table>
+            <li>Tabela <b>pedidos</b></li>
+            <table>
+                <tr>
+                    <th>id</th>
+                    <th>produto</th>
+                    <th>usuario_id</th>
+                </tr>
+                <tr>
+                    <td>1</td>
+                    <td>Notebook</td>
+                    <td>1</td>
+                </tr>
+                <tr>
+                    <td>2</td>
+                    <td>Celular</td>
+                    <td>1</td>
+                </tr>
+                <tr>
+                    <td>3</td>
+                    <td>Fone</td>
+                    <td>2</td>
+                </tr>
+            </table>
+            <p>Consulta com INNER JOIN:</p>
+            <pre><code>
+            SELECT u.nome, p.produto
+            FROM usuarios u
+            INNER JOIN pedidos p ON u.id = p.usuario_id;
+            </code></pre>
+            <p>➡️ Resultado:</p>
+            <table>
+                <tr>
+                    <th>nome</th>
+                    <th>produto</th>
+                </tr>
+                <tr>
+                    <td>João</td>
+                    <td>Notebook</td>
+                </tr>
+                <tr>
+                    <td>João</td>
+                    <td>Celular</td>
+                </tr>
+                <tr>
+                    <td>Maria</td>
+                    <td>Fone</td>
+                </tr>
+            </table>
             <h2 id="MobileAu">8. Automação mobile com Appium</h2>
             <p>
                 
