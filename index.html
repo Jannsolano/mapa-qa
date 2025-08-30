@@ -893,8 +893,53 @@
             </table>
             <h2 id="MobileAu">8. Automação mobile com Appium</h2>
             <p>
-                
+                Primeiro precisamos setar o ambiente de automação mobile
             </p>
+            <h3>Ferramentas utilizadas:</h3>
+            <li><a href="https://nodejs.org/pt">Node.js</a></li>
+            <li><a href="https://openjdk.org">Open JDK</a></li>
+            <li><a href="https://webdriver.io">Webdriver.io</a></li>
+            <li><a href="https://developer.android.com/studio?hl=pt-br">Android Studio</a></li>
+            <p>Após a instalação do Node e do OpenJDK, vamos setar as variáveis de ambiente no sistema operacional</p>
+            <ol>
+                <li>Pesquise no windows <b>Variáveis de ambiente</b></li>
+                <li>ao abrir a janela procure a opção "Enviroment Variables...."</li>
+                <li>Então criar nova variável em "System variables"</li>
+                <li>defina um nome como JAVA_HOME</li>
+                <li>coloque o valor da variavel de ambiente, ex: E:\Java\jdk-22</li>
+            </ol>
+            <h3>Setup do Android Studio</h3>
+            <ol>
+                <li>Inicie o instalador</li>
+                <li>Abra o android studio, não precisa importar nada</li>
+                <li>Crie um new project, no activity</li>
+                <li>defina o nome do dispositivo, versão do android, e API</li>
+                <li>vá para Device manager caso necessário baixar outras versões</li>
+            </ol>
+            <h3> Setando a variável do Android Home </h3>
+            <ol>
+                <li>Vá para a mesma janela do System variables</li>
+                <li>Crie uma nova chamada ANDROID_HOME</li>
+                <li>Cole no variable value o diretório da pasta AppData\Local\Android\Sdk</li>
+                <li>Salve e feche tudo </li>
+            </ol>
+            <h3> Setup do Appium </h3>
+            <ol>
+                <li>vá no repositório do github do Appium</li>
+                <li>siga para Releases</li>
+                <li>escolha a versão mais recente</li>
+                <li>baixe, run anyway</li>
+                <li>faça a instalação do setup</li>
+                <li>abra o Appium</li>
+                <li>vá no terminal do bash e digite <b>npm install -g appium</b></li>
+                <li>uma vez instalado, basta digitar <b>appium</b> no bash para rodar</li>
+                <li>para checar se está tudo okay, instale o <b>npm install appium-doctor -g</b></li>
+                <li>dessa forma, rodando no bash o comando <b>appium-doctor</b> ele irá checar se sua instalação do appium está okay</li>
+                <li>E por fim temos que instalar o <b>appium driver install uiautomator2</b></li>
+                <li>digitar o comando <b>appium driver list</b> irá listar todos os drivers</li>
+            </ol>
+            <h3> Setup do WebdriverIO </h3>
+            
             <h2 id="syllabus">ISQTB Foundation Level</h2>
             <h3>Capítulo 1 – Fundamentos do Teste</h3>
             <p>
