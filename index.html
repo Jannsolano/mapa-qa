@@ -925,21 +925,65 @@
             </ol>
             <h3> Setup do Appium </h3>
             <ol>
-                <li>vá no repositório do github do Appium</li>
-                <li>siga para Releases</li>
+                <li>vá no repositório do github do Appium inspector</li>
+                <li>siga para <a href="https://github.com/appium/appium-inspector/releases">Releases</a></li>
                 <li>escolha a versão mais recente</li>
                 <li>baixe, run anyway</li>
                 <li>faça a instalação do setup</li>
-                <li>abra o Appium</li>
-                <li>vá no terminal do bash e digite <b>npm install -g appium</b></li>
+                <li>abra o appium-inspector</li>
+                <li>vá no terminal do bash e digite <b>npm install -g appium</b> caso não dê certo, clique <a href="https://appium.io/docs/en/latest/quickstart/install">Aqui</a></li>
                 <li>uma vez instalado, basta digitar <b>appium</b> no bash para rodar</li>
                 <li>para checar se está tudo okay, instale o <b>npm install appium-doctor -g</b></li>
-                <li>dessa forma, rodando no bash o comando <b>appium-doctor</b> ele irá checar se sua instalação do appium está okay</li>
-                <li>E por fim temos que instalar o <b>appium driver install uiautomator2</b></li>
-                <li>digitar o comando <b>appium driver list</b> irá listar todos os drivers</li>
+                <li>dessa forma, rodando no bash o comando <b>appium-doctor</b> ele irá checar se sua instalação do appium está okay, para acessar o repositório do appium-doctor, clique <a href="https://github.com/appium/appium-doctor">aqui</a></li>
+                <li>E por fim temos que instalar o <a href="https://appium.io/docs/en/latest/quickstart/uiauto2-driver">UiAutomator2</a> utilizando essa linha no Bash: <b>appium driver install uiautomator2</b></li>
+                <li>digitar o comando <b>appium driver list</b> irá listar todos os drivers(caso precise de um driver para IOS baixe o xcuitest)</li>
             </ol>
             <h3> Setup do WebdriverIO </h3>
-            
+            <ol>
+                <li>acesse o site do <a href="https://webdriver.io"></a> caso precise checar a documentação</li>
+                <li>crie a pasta do projeto</li>
+                <li>abra a pasta com o visual code</li>
+                <li>abra o terminal do git bash no visual code para facilitar a visualização</li>
+                <li>Agora sim podemos rodar o comando <b>npm init wdio@latest .</b></li>
+                <li>selecione "yes" para continuar e confirme a pasta</li>
+                <li>escolha a opção E2E Testing - of Web or Mobile Applications</li>
+                <li>então escolha Local machine</li>
+                <li>environment escolha Mobile</li>
+                <li>e confirme Android</li>
+                <li>framework pode ser Mocha ou Cucumber, nesse caso vamos de <a href="https://mochajs.org">Mocha</a></li>
+                <li>Typescript: "no"</li>
+                <li>webdriver autogenerate test files: "yes"</li>
+                <li>location: manter</li>
+                <li>page objects: yes</li>
+                <li>location: manter</li>
+                <li>Which reporter: spec</li>
+                <li>add plugin: wait-for</li>
+                <li>visual testing? "No"</li>
+                <li>add a service: appium</li>
+                <li>npm install: yes</li>
+                <li>continue appium setup: "yes"</li>
+                <li>need help setting up Android Environment?</li>
+                <li>Android Emulator</li>
+                <li>browser: none</li>
+                <li>download missing binaries and complete setup: yes</li>
+                <li>exit</li>
+            </ol>
+            <h3>Baixe uma aplicação .apk</h3>
+            <li>após fazer o download do aplicativo, crie uma pasta app na raiz do projeto</li>
+            <li>no Android Studio configure um novo dispositivo com o mesmo tipo de celular, mas com uma versão e API diferentes do Android</li>
+            <h3>Configurando as capabilities</h3>
+            <li>No appium Inspector vc vai ter que ir no Capability builder e colocar as informações da automação em ordem</li>
+            <ol>
+                <li>platformName "Android"</li>
+                <li>appium:platformVersion "versão do Android"</li>
+                <li>appium:deviceName "nome do celular emulado, e a versão da API"</li>
+                <li>appium:app "local do apk"</li>
+                <li>appium:automationName "nome da automação, pode ser algo como uiautomator2"</li>
+            </ol>
+            <li>com tudo isso configurado, você pode iniciar uma sessão após iniciar o appium no git bash com o comando <b>appium -p 4724</b></li>
+            <li>essa porta é utilizada no appium inspector, pq o webdriver utiliza a padrão 4723 para rodar o aplicativo</li>
+            <li>para utilizar os dois celulares emulados ao mesmo tempo, copiamos as capabilities do appium inspector, e colamos na área capabilities do arquivo <b>Wdio.config.js</b></li>
+            <li>agora ao abrir o Appium inspector ele deve interagir com os 2 celulares do Android studio</li>
             <h2 id="syllabus">ISQTB Foundation Level</h2>
             <h3>Capítulo 1 – Fundamentos do Teste</h3>
             <p>
