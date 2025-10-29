@@ -90,7 +90,12 @@ h2 {
     box-shadow: 1px 2px 10px var(--darkg);
 }
 
-h3, p {
+h3 {
+    padding: 15px;
+    text-shadow: 2px 1px 2px var(--black);
+}
+
+p {
     padding: 15px;
     text-shadow: 2px 1px 2px var(--black);
 }
@@ -238,17 +243,27 @@ button:hover {
     color: var(--blue);
 }
 
-table, th, td {
+table {
     border-collapse: collapse;
     border: 1.5px solid black;
     padding: 5px;
     margin: 15px;
     background-color: #292b2c7c;
     text-align: center;
-    width: 350px;
+    max-width: 800px;
+    box-shadow: 1px 1px 4px var(--black);
 }
 
-th 
+td {
+    padding: 5px;
+    border: 1.5px solid black;
+}
+
+th {
+    padding: 5px;
+    border: 1.5px solid black;
+    background-color: var(--lightg);
+}
 
 footer {
     grid-area: 3 / 1 / 4 / -1;

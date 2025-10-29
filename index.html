@@ -756,9 +756,263 @@
             <!-- Capítulo 6 -->
             <div id="PostmanApi">
                 <h2>6. Testes de API</h2>
+                <h3>O que é uma API?</h3>
+                <ul>
+                    <li>Uma ponte que permite que   sistemas conversem entre si
+                    <li>Um conjunto de regras que define como essa comunicação deve ser feita
+                    <li>Um meio padronizado de solicitar e enviar informações
+                </ul>
                 <p>
-                    em breve conteúdo
+                    Você (usuário) não entra na cozinha (banco de dados), o garçom (API) leva seu pedido e te traz o prato certo 
                 </p>
+
+                <h3>Para que serve uma API?</h3>
+                <ul>
+                    <li>Integrar aplicações diferentes</li>
+                    <li>Expor dados de forma segura</li>
+                    <li>Automatizar comunicações entre serviços</li>
+                    <li>Criar micro-serviços independentes</li>
+                    <li>Padronizar trocas de informação</li>
+                </ul>
+                <p>Exemplos do dia a dia:</p>
+                <ul>
+                    <li>Login com Google / Facebook</li>
+                    <li>Previsão do tempo em apps</li>
+                    <li>Pagamentos por PIX, PayPal, Stripe</li>
+                    <li>Google Maps em apps de delivery</li>
+                </ul>
+                <h3>Tipos mais comuns de APIs</h3>
+                <table>
+                    <tr>
+                        <th>Tipo</th>
+                        <th>Características
+                        </th>
+                        <th>Onde é comum</th>
+                    </tr>
+                    <tr>
+                        <td>REST</td>
+                        <td>Usa HTTP, dados geralmente em JSON, simples e rápido</td>
+                        <td>Web, apps mobile</td>
+                    </tr>
+                    <tr>
+                        <td>SOAP</td>
+                        <td>Mais rígido, usa XML, muito seguro</td>
+                        <td>Bancos, sistemas legados</td>
+                    </tr>
+                    <tr>
+                        <td>GraphQL</td>
+                        <td>Cliente decide o que quer receber, evita dados desnecessários</td>
+                        <td>Apps com muito consumo de dados</td>
+                    </tr>
+                    <tr>
+                        <td>gRPC</td>
+                        <td>Muito rápido, usa Protobuf</td>
+                        <td>Microserviços de alta performance</td>
+                    </tr>
+                </table>
+                <p>
+                    Como QA iniciante, REST será seu foco principal.
+                    <br>
+                    API rest:
+                </p>
+                <img src="imagens/RestAPI.png" alt="API rest">
+                <p>
+                    API SOAP:
+                </p>
+                <img src="imagens/SOAPAPI.jpg" alt="soap API">
+                <p>
+                    Graph GL:
+                </p>
+                <img src="imagens/GraphGL.png" alt="Graph GL">
+                <h3>✅ REST API — Conceitos essenciais para QA</h3>
+                <ul>
+                    <li>Usa <b>endpoints</b> para acessar recursos</li>
+                    <li>Sempre haverá:</li>
+                    <ul>
+                        <li>Método HTTP (o que quero fazer)</li>
+                        <li>URL (onde vou buscar)</li>
+                        <li>Body (opcional — o que estou enviando)</li>
+                        <li>Response (o que retorna)</li>
+                    </ul>
+                </ul>
+                <h3>Métodos HTTP</h3>
+                <table>
+                    <tr>
+                        <th>Método</th>
+                        <th>Função</th>
+                        <th>Exemplo real</th>
+                    </tr>
+                    <tr>
+                        <td>GET</td>
+                        <td>Buscar dados</td>
+                        <td>Listar produtos</td>
+                    </tr>
+                    <tr>
+                        <td>POST</td>
+                        <td>Criar dados</td>
+                        <td>Criar usuário</td>
+                    </tr>
+                    <tr>
+                        <td>PUT</td>
+                        <td>Atualizar tudo</td>
+                        <td>Editar perfil completo</td>
+                    </tr>
+                    <tr>
+                        <td>PATCH</td>
+                        <td>Atualizar parcial</td>
+                        <td>Atualizar só email</td>
+                    </tr>
+                    <tr>
+                        <td>DELETE</td>
+                        <td>Remover</td>
+                        <td>Apagar conta</td>
+                    </tr>
+                </table>
+                <h3>Códigos de Status HTTP</h3>
+                <table>
+                    <tr>
+                        <th>Código</th>
+                        <th>Significado</th>
+                        <th>Exemplo</th>
+                    </tr>
+                    <tr>
+                        <td>200 OK</td>
+                        <td>Funcionou</td>
+                        <td>GET correto</td>
+                    </tr>
+                    <tr>
+                        <td>201 Created</td>
+                        <td>Criado</td>
+                        <td>POST OK</td>
+                    </tr>
+                    <tr>
+                        <td>400 Bad Request</td>
+                        <td>Algo errado no pedido</td>
+                        <td>Body inválido</td>
+                    </tr>
+                    <tr>
+                        <td>401 Unauthorized</td>
+                        <td>Usuário não autenticado</td>
+                        <td>Falta token</td>
+                    </tr>
+                    <tr>
+                        <td>404 Not Found</td>
+                        <td>Endereço não existe</td>
+                        <td>URL errada</td>
+                    </tr>
+                    <tr>
+                        <td>500 Internal Server Error</td>
+                        <td>Erro no servidor</td>
+                        <td>BUG na API</td>
+                    </tr>
+                </table>
+                <h3>✅ Estrutura comum de requisição e resposta</h3>
+                <p>
+                    Request:
+                </p>
+                <pre><code>
+                    http
+
+                    POST /users
+                    Content-Type: application/json
+
+                    {
+                        "email": "teste@teste.com",
+                        "password": "123456"
+                    }
+                </code></pre>
+                <p>
+                    Response:
+                </p>
+                <pre><code>
+                   json
+
+                    {
+                      "id": 10,
+                      "email": "teste@teste.com"
+                    } 
+                </code></pre>
+
+                <h3>✅ Autenticação (importantíssimo para QA)</h3>
+                <ul>
+                    <li>Bearer Token (JWT) → usada em 90% dos projetos modernos</li>
+                    <li>API Key</li>
+                    <li>Basic Auth (usuário + senha) — menos usado</li>
+                </ul>
+                <p>
+                    → Sempre testar cenários com:
+                </p>
+                <ul>
+                    <li>Token válido</li>
+                    <li>Token expirado</li>
+                    <li>Sem token</li>
+                    <li>Token com permissões diferentes</li>
+                </ul>
+                <h3>✅ Testes de API no Postman (o essencial para QA)</h3>
+                <p>
+                    O que você deve testar:
+                </p>
+                <ul>
+                    <li>✔ Status code correto</li>
+                    <li>✔ Schema da resposta (estrutura de campos)
+                    </li>
+                    <li>✔ Campos obrigatórios
+                    </li>
+                    <li>✔ Regras de negócio (validações)
+                    </li>
+                    <li>✔ Headers corretos
+                    </li>
+                    <li>✔ Autenticação e permissões
+                    </li>
+                    <li>✔ Performance (tempo de resposta)
+                    </li>
+                    <li>✔ Fluxos completos (ex.: criar → listar → alterar → excluir)</li>
+                </ul>
+                <h3>Testes negativos (muito importantes)</h3>
+                <ul>
+                    <li>Enviar dados incorretos</li>
+                    <li>Tentar excluir algo inexistente</li>
+                    <li>Violação de formatos (email inválido, campos faltando)</li>
+                </ul>
+                <h3>Ferramentas mais populares</h3>
+                <table>
+                    <tr>
+                        <th>Ferramenta</th>
+                        <th>Uso principal</th>
+                    </tr>
+                    <tr>
+                        <td>Postman</td>
+                        <td>Testes manuais e automação simples</td>
+                    </tr>
+                    <tr>
+                        <td>Insomnia</td>
+                        <td>Alternativa ao Postman</td>
+                    </tr>
+                    <tr>
+                        <td>Swagger / OpenAPI</td>
+                        <td>Documentação interativa</td>
+                    </tr>
+                    <tr>
+                        <td>Newman</td>
+                        <td>Rodar testes do Postman via CLI(automação CI/CD)</td>
+                    </tr>
+                    <tr>
+                        <td>JMeter / K6</td>
+                        <td>Testes de carga</td>
+                    </tr>
+                    <tr>
+                        <td>SoapUI</td>
+                        <td>Testes SOAP</td>
+                    </tr>
+                </table>
+                <h3>✅ Segurança — o que um QA deve validar</h3>
+                <ul>
+                    <li>Não expor senhas, tokens ou dados sensíveis</li>
+                    <li>Regras de CORS quando há front-end</li>
+                    <li>Rate limit (limite de requisições)</li>
+                    <li>SQL Injection / XSS quando testado via API</li>
+                    <li>Senhas com criptografia</li>
+                </ul>
             </div>
             <!-- Capítulo 7 -->
             <div id="database">
